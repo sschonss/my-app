@@ -1,70 +1,89 @@
-# Getting Started with Create React App
+# Jogo da Velha em React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este código implementa um jogo da velha (Tic-Tac-Toe) em React. Consiste em três componentes principais:
 
-## Available Scripts
+## Componente `Square`
 
-In the project directory, you can run:
+Representa um quadrado clicável no tabuleiro do jogo.
 
-### `npm start`
+```jsx
+function Square(props) {
+  return (
+    <button className="square" onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
+}
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Componente `Board`
 
-### `npm test`
+Representa o tabuleiro do jogo, contendo 9 quadrados.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```jsx
+class Board extends React.Component {
+  renderSquare(i) {
+    return (
+      <Square
+        value={this.props.squares[i]}
+        onClick={() => this.props.onClick(i)}
+      />
+    );
+  }
 
-### `npm run build`
+  render() {
+    // Renderiza os quadrados em linhas
+  }
+}
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Componente `Game`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Controla o estado do jogo, gerencia o histórico de movimentos e identifica o vencedor.
 
-### `npm run eject`
+```jsx
+class Game extends React.Component {
+  constructor(props) {
+    // Inicializa o estado do jogo
+  }
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+  handleClick(i) {
+    // Manipula os cliques nos quadrados
+  }
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  jumpTo(step) {
+    // Volta para um movimento específico
+  }
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+  render() {
+    // Renderiza o tabuleiro, controla o histórico de movimentos e exibe o vencedor ou próximo jogador
+  }
+}
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
 
-## Learn More
+O jogo utiliza estados para controlar o histórico de movimentos, identificar o próximo jogador e determinar o vencedor. Cada vez que um quadrado é clicado, o estado é atualizado para refletir a mudança no tabuleiro.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Função calculateWinner
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Verifica se há um vencedor com base nos quadrados preenchidos.
 
-### Code Splitting
+```jsx
+function calculateWinner(squares) {
+  // Verifica as linhas, colunas e diagonais para determinar o vencedor
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+## Inicialização do Jogo
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+No final do código, o componente Game é renderizado no elemento com o ID "root" usando ReactDOM.
 
-### Making a Progressive Web App
+```jsx
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<Game />);
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Esse é o funcionamento geral do jogo da velha em React. Os componentes Square, Board e Game interagem para proporcionar a funcionalidade completa do jogo.
