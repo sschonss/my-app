@@ -1,5 +1,7 @@
 # Jogo da Velha em React
 
+[Link do Projeto](https://github.com/sschonss/tictactoe)
+
 Este código implementa um jogo da velha (Tic-Tac-Toe) em React. Consiste em três componentes principais:
 
 ## Componente `Square`
